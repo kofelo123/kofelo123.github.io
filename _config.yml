@@ -16,10 +16,7 @@
 title: 허정원
 email: hlw123@naver.com
 description: >- # this means to ignore newlines until "baseurl:"
- 지식을 게시하는 블로그가 아닙니다.
- 하루하루 뭘 했는지 적어보려고 가볍게 쓰는 페이지입니다.
- 		<!-- 라이브리 시티 설치 코드 -->
-<div id="lv-container" data-id="city" data-uid="MTAyMC8zMTY2Ny84MjMx">
+ <div id="lv-container" data-id="city" data-uid="MTAyMC8zMTY2Ny84MjMx">
 	<script type="text/javascript">
    (function(d, s) {
        var j, e = d.getElementsByTagName(s)[0];
@@ -35,7 +32,7 @@ description: >- # this means to ignore newlines until "baseurl:"
 	</script>
 <noscript> 라이브리 댓글 작성을 위해 JavaScript를 활성화 해주세요</noscript>
 </div>
-<!-- 시티 설치 코드 끝 -->	
+
  
 
 #baseurl: "" # the subpath of your site, e.g. /blog
