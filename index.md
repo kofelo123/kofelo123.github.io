@@ -4,7 +4,7 @@
 # See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 layout: home
 ---
-<div id="lv-container" data-id="city" data-uid="MTAyMC8zMTY2Ny84MjMx" style="position:relative;float:left;width:100%;bottom:0px;">
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMTY2Ny84MjMx" style="position:relative;float:left;width:100%;bottom:-200px;">
 	<script type="text/javascript">
    (function(d, s) {
        var j, e = d.getElementsByTagName(s)[0];
