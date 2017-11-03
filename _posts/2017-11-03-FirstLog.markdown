@@ -15,3 +15,22 @@ categories: jekyll update
 '당분간 개발위주로,자기소개 홈페이지 작성할것,기존의 게시판 계획과 달리  
 
 백엔드 프로그래밍 없이 html 기반으로 된 소개 페이지 + 소셜댓글 정도.. 해서 github.io에 넣을것이다.'
+
+		<!-- 라이브리 시티 설치 코드 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMTY2Ny84MjMx">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 라이브리 댓글 작성을 위해 JavaScript를 활성화 해주세요</noscript>
+</div>
+<!-- 시티 설치 코드 끝 -->	
