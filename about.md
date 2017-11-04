@@ -9,6 +9,7 @@ permalink: /about/
 저는 자바 웹 개발자를 꿈꾸는 취업준비생 허정원 입니다.  
 
 [자기소개 페이지][마이페이지]  
+
 [깃허브 페이지](https://www.github.com/kofelo123)  
 
 
