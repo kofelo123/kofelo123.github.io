@@ -22,7 +22,7 @@ description: >- # this means to ignore newlines until "baseurl:"
  
 
 #baseurl: "" # the subpath of your site, e.g. /blog
-url: 자기소개 웹페이지 https://kofelo123.github.io/nantes/index.html
+url: 자기소개 웹페이지 https://kofelo123.github.io/nantes/index.html 
 #twitter_username: jekyllrb
 github_username:  kofelo123
 
