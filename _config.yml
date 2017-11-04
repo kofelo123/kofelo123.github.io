@@ -18,11 +18,11 @@ email: hlw123@naver.com
 description: >- # this means to ignore newlines until "baseurl:"
  지식을 게시하는 블로그가 아닙니다.
  하루하루 뭘 했는지 적어보려고 가볍게 쓰는 페이지입니다.
-
- 
+ 자기소개 웹페이지:https://kofelo123.github.io/nantes/index.html
+ baseurl:"https://kofelo123.github.io/nantes/index.html"
 
 #baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+#url: "" # the base hostname & protocol for your site, e.g. http://example.com
 #twitter_username: jekyllrb
 github_username:  kofelo123
 
