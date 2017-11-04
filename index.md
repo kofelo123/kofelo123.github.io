@@ -5,7 +5,7 @@
 layout: home
 ---
 
-<div id="lv-container" data-id="city" data-uid="MTAyMC8zMTY2Ny84MjMx" style="position:absolute;width:50%;bottom:-300px;">
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMTY2Ny84MjMx" style="position:absolute;width:50%;bottom:0px;">
 	<script type="text/javascript">
    (function(d, s) {
        var j, e = d.getElementsByTagName(s)[0];
