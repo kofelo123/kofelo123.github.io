@@ -1,0 +1,16 @@
+---
+layout: post
+title:  "MyLog"
+date:   2017-11-03 20:15:47 +0900
+categories: jekyll update
+---
+
+- github.io 설정  
+
+-소개페이지 완성 및 배포   
+
+-소셜댓글(디스커스,라이브리)  
+
+
+'맘스터치 웹페이지 스프링 MVC 방식으로 구현해 나갈것..'
+
