@@ -1,0 +1,17 @@
+---
+layout: post
+title:  "MomsTouch Project"
+date:   2017-11-06 20:15:47 +0900
+categories: jekyll update
+---
+
+- 맘스터치 프로젝트 옮기는 작업중  
+
+- ojdbc 관련 처리, front쪽 파일 옮기는 작업  
+
+
+
+
+'옮기고 spring mvc로 고치는 작업 계속 할것.'  
+
+- back쪽 작업 
