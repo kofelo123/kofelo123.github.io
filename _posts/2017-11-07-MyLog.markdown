@@ -1,0 +1,21 @@
+---
+layout: post
+title:  "MomsTouch Project"
+date:   2017-11-07 20:15:47 +0900
+categories: jekyll update
+---
+
+-작업내용  
+
+- 맘스터치 프로젝트 옮기는 작업중  
+
+- back단의 옮기는 작업 중에 우선 controller mapping 옮기는 작업 중 
+
+
+
+
+'백단에 옮기는 작업에 시간이 생각보다 좀 걸릴것으로 보임'  
+
+-앞으로 할일
+
+- 백단 작업 , 설계  
