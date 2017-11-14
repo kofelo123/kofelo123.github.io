@@ -14,6 +14,6 @@ MarkDown 방식으로 작성하는 텍스트파일 기반 블로그입니다.
 ___
 
 # Todo
-> - [ ] auto move scrolling<br>
+>  [ ] auto move scrolling<br>
 > - [x] responsive sizing
 > - [o] responsive sizing
