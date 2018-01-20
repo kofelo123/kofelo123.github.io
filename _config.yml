@@ -44,3 +44,4 @@ plugins:
 #   - vendor/gems/
 #   - vendor/ruby/
 
+pagenate: 5
