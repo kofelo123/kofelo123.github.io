@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.thearc.mapper.MessageMapper">
+
+
+
+
+	<update id="updateState">
+		update tbl_message set opendate = now() where mid= #{mid}
+	</update>
+	
+	
+	<update id="addCountList">
+	  
+	update chat set countlist = countlist+1 where countname='count';
+	</update>
+	
+	
+	
+	
+	<!--  쪽지관련 -->
+	
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				and title like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'c'.toString()">
+				and message like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'w'.toString()">
+				and sender like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'tc'.toString()">
+				and ( title like CONCAT('%', #{keyword}, '%') OR message like
+				CONCAT('%', #{keyword}, '%'))
+			</if>
+			<if test="searchType == 'cw'.toString()">
+				and ( message like CONCAT('%', #{keyword}, '%') OR sender like
+				CONCAT('%', #{keyword}, '%'))
+			</if>
+			<if test="searchType == 'tcw'.toString()">
+				and ( title like CONCAT('%', #{keyword}, '%')
+				OR
+				message like CONCAT('%', #{keyword}, '%')
+				OR
+				sender like CONCAT('%', #{keyword}, '%'))
+			</if>
+		</if>
+	</sql>
+	
+	
+	
+	<select id="listSearch" resultType="MessageVO">
+<![CDATA[  
+  select * 
+  from tbl_message 
+  where targetid=#{targetid} and mid > 0 
+]]>
+
+		<include refid="search"></include>
+  
+<![CDATA[    
+  order by mid desc
+  limit #{cri.pageStart}, #{cri.perPageNum}
+]]>
+	</select>
+	<!-- 기존의 파라미터 하나로 접근시에 그냥 cri넘겨주고 pageStart이렇게 바로 접근했는데, map형식으로 접근할떄는
+	cri.pagestart이런식으로 소속을 명시해줘야 하는것 같다.  -->
+	
+	
+	<select id="listSearchCount" resultType="int">
+<![CDATA[  
+  select count(mid) 
+  from tbl_message 
+  where mid > 0 
+]]>
+		<include refid="search"></include>
+
+	</select>
+	
+	
+	<!--쪽지 read 관련  -->
+	
+	<select id="readMessage" resultType="MessageVO">
+		select * from tbl_message where mid = #{mid}
+	</select>
+	
+	<update id="updateReadCheck">
+		update tbl_message set readcheck = 'y' where mid = #{mid};
+	</update>
+	
+	<insert id="create">
+		insert into tbl_message (sender,targetid,title,message) values(#{sender},#{targetid},#{title},#{message})
+	</insert>
+
+</mapper>
+
+

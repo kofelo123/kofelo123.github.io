@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.thearc.mapper.userMapper">
+	
+	<select id="login" resultType="UserVO">
+		select uid, upw, uname,authority from tbl_user where uid = #{uid} and upw = #{upw}
+	</select>
+	
+	
+  <update id="keepLogin" >
+  update tbl_user set sessionKey = #{sessionId}, sessionLimit = #{next} where uid = #{uid}
+  </update>
+
+	<select id="checkUserWithSessionKey" resultType="UserVO">
+	select * from tbl_user where sessionKey = #{value}  and sessionlimit > now()
+	</select>	
+
+	<insert id="join">
+		insert into tbl_user(uid, upw, uname, email,address,phone)
+		values(#{uid},#{upw},#{uname},#{email4},#{addr1},#{phone4})
+	
+	</insert>
+	
+	<select id="confirmId" resultType="UserVO">
+		select * from tbl_user where uid= #{uid}	
+	</select>
+	
+	 
+	<select id="findzipnum" resultType="AddressVO">		
+		select * from address where dong LIKE CONCAT('%',#{dong},'%')
+	</select><!-- (기본적으로 mybatis의 #{}은 ' ' 처리가된다. 그래서 더큰 범위가 있을때는 ""해야한다.  -->
+		<!-- select * from address where dong like "%"#{dong}"%" -->
+
+	<select id="idfindofmail" resultType="UserVO">
+		select uid,upw,uname from tbl_user where email= #{email3}
+	</select>
+	
+	<!-- <update id="encrypthash">
+		update tbl_user set encrypthash = #{pwUriEnc} where uid = #{userid}
+	</update>
+	 -->
+	<select id="hashbyid" resultType="UserVO">
+		select uid from tbl_user where upw = #{upw} and uid = #{uid}
+	</select>
+	
+	<update id="modifypw">
+		update tbl_user set upw = #{upw} where uid = #{uid}
+	</update>
+	
+
+</mapper>

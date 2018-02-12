@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.thearc.mapper.BoardMapper">
+
+	<insert id="create">
+		insert into tbl_board (title, content, writer,category)
+		values(#{title},#{content}, #{writer},#{category})
+	</insert>
+	<insert id="create2">
+		insert into tbl_board2 (title, content, writer)
+		values(#{title},#{content}, #{writer})
+	</insert>
+
+	<select id="read" resultType="com.thearc.domain.BoardVO">
+		select
+		bno, title, content, writer, regdate, viewcnt , replycnt,countlike,category
+		from
+		tbl_board
+		where bno = #{bno}
+	</select>
+
+	<select id="listAll" resultType="com.thearc.domain.BoardVO">
+ <![CDATA[
+ select 
+   bno, title, content, writer, regdate, viewcnt 
+ from 
+   tbl_board 
+ where bno > 0 
+ order by bno desc, regdate desc
+ ]]>
+	</select>
+
+	<select id="listPage" resultType="BoardVO">
+ <![CDATA[
+ select 
+   bno, title, content, writer, regdate, viewcnt , replycnt
+ from 
+   tbl_board 
+ where bno > 0 
+ order by bno desc, regdate desc
+ limit #{page}, 10
+ ]]>	
+	</select>
+
+	<select id="listCriteria" resultType="BoardVO">
+ <![CDATA[
+ select 
+   bno, title, content, writer, regdate, viewcnt , replycnt
+ from 
+   tbl_board 
+ where bno > 0 
+ order by bno desc, regdate desc
+ limit #{pageStart}, #{perPageNum}
+ ]]>
+	</select>
+
+
+	<update id="update">
+		update tbl_board set title =#{title}, content =#{content}
+		where bno = #{bno}
+	</update>
+
+	<delete id="delete">
+		delete from tbl_board where bno = #{bno}
+	</delete>
+
+
+
+	<select id="countPaging" resultType="int">
+ <![CDATA[
+ select 
+   count(bno) 
+ from 
+   tbl_board 
+ where 
+   bno > 0 
+ ]]>
+	</select>
+
+
+
+	<sql id="search">
+		<if test="cri.searchType != null">
+			<if test="cri.searchType == 't'.toString()">
+				and title like CONCAT('%', #{cri.keyword}, '%')
+			</if>
+			<if test="cri.searchType == 'c'.toString()">
+				and content like CONCAT('%', #{cri.keyword}, '%')
+			</if>
+			<if test="cri.searchType == 'w'.toString()">
+				and writer like CONCAT('%', #{cri.keyword}, '%')
+			</if>	
+			<if test="cri.searchType == 'tc'.toString()">
+				and ( title like CONCAT('%', #{cri.keyword}, '%') OR content like
+				CONCAT('%', #{cri.keyword}, '%'))
+			</if>
+			<if test="cri.searchType == 'cw'.toString()">
+				and ( content like CONCAT('%', #{cri.keyword}, '%') OR writer like
+				CONCAT('%', #{cri.keyword}, '%'))
+			</if>
+			<if test="cri.searchType == 'tcw'.toString()">
+				and ( title like CONCAT('%', #{cri.keyword}, '%')
+				OR
+				content like CONCAT('%', #{cri.keyword}, '%')
+				OR
+				writer like CONCAT('%', #{cri.keyword}, '%'))
+			</if>
+		</if>
+	</sql>
+
+	<select id="listSearch" resultType="BoardVO">
+<![CDATA[  
+  select * 
+  from tbl_board 
+  where bno > 0 and category = #{category}
+]]>
+
+		<include refid="search"></include>
+  
+<![CDATA[    
+  order by bno desc
+  limit #{cri.pageStart}, #{cri.perPageNum}
+]]>
+	</select>
+	
+	 
+		<select id="listThumnail" resultType="String">
+<![CDATA[  
+select fullName from tbl_attach 
+where imgnum=1 and bno IN (select bno from tbl_board where category=#{category})
+
+]]>
+
+	
+  
+<![CDATA[    
+  order by bno desc
+  limit #{cri.pageStart}, #{cri.perPageNum}
+]]>
+	</select>
+
+	<select id="listSearchCount" resultType="int">
+<![CDATA[  
+  select count(bno) 
+  from tbl_board 
+  where bno > 0 and category = #{category}
+]]>
+		<include refid="search"></include>
+
+	</select>
+	
+	
+
+
+ 
+<update id="updateReplyCnt">
+  update tbl_board set replycnt = replycnt + #{amount} where bno = #{bno}
+</update>
+
+
+<update id="updateViewCnt">
+  update tbl_board set viewcnt = viewcnt +1 where bno = #{bno}
+</update>
+
+<select id="countImgNum" resultType="int">
+	select count(fullName) from tbl_attach where bno= LAST_INSERT_ID();
+</select>
+
+ <update id="updateImgNum">
+update tbl_attach set imgnum = #{count} where fullName=#{fullName};
+</update>
+
+<insert id="addAttach">
+insert into tbl_attach(fullname, bno) values (#{fullName}, LAST_INSERT_ID())
+</insert> 
+
+
+
+
+<insert id="addAttach2">
+insert into tbl_attach2(fullname, bno) values (#{fullName}, LAST_INSERT_ID())
+</insert> 
+
+
+<select id="getAttach" resultType="string">
+select fullname from tbl_attach where bno = #{bno} order by regdate
+</select>
+ 
+<select id="getAttachOne" resultType="string"> 
+select fullname from tbl_attach where bno = #{bno} order by regdate limit 1
+</select> 
+
+
+
+ 
+<delete id="deleteAttach">
+delete from tbl_attach where bno = #{bno}
+</delete>
+
+<insert id="replaceAttach">
+insert into tbl_attach(fullname, bno) values (#{fullName}, #{bno})
+</insert>
+  
+  
+  <update id="addlike">
+  	update tbl_board set countlike = countlike + 1 where bno = #{bno}
+  </update>
+ 	
+  <update id="sublike">
+  	update tbl_board set countlike = countlike - 1 where bno = #{bno}
+  </update>
+ 
+ <select id="checklike" resultType="LikeVO">
+ 	select * from tbl_check where uid=#{uid} and bno=#{bno}
+ </select>
+ 
+ <insert id="insertlikedefault">
+ 	insert into tbl_check(uid,bno) values (#{uid}, #{bno})
+ </insert>
+ 
+ <update id="updatelikey">
+ 	update tbl_check set likecheck='y' where uid=#{uid} and bno=#{bno}
+ </update>
+ 
+ <update id="updateliken">
+ 	update tbl_check set likecheck='n' where uid=#{uid} and bno=#{bno}
+ </update>
+ 
+ 
+ 
+</mapper>

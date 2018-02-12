@@ -1,0 +1,73 @@
+@CHARSET "UTF-8";
+.joinForm{width:100%;height:1000px;background-size: 100% 100%;background-image:url(../image/con_v_Bg.gif);background-repeat:repeat-x;margin:0;padding:0;font-size:1.25em; text-align:left;}
+.dup {
+	width: 90px; /* 버튼의 가로 크기를 정합니다. */
+	height: 23px; /* 버튼의 세로 크기를 정합니다. */
+	border-radius: 8px; /* border-radius 통해 둥그런 버튼으로 만듭니다. */
+	border: none; /* 배경 이미지가 어둡기 때문에 여기서 border는 없애버리겠습니다. */
+	margin: 0 0 0 5px; /* 마진을 왼쪽만 줘서 input과의 간격을 벌립니다. */
+	font-weight: bold; /* 글꼴 두께를 두껍게 */
+	color: #FFF; /* 글꼴의 색상은 흰색으로 */
+	background-image: url(../image/dup.jpg);
+	/* 백그라운드 이미지를 사용합니다. */
+	background-repeat: repeat-x; /* 백그라운드 이미지를 x축으로 반복 */
+	background-position: center center; /* 백그라운드 이미지의 위치를 중앙으로 위치 */
+}
+#buttons input{
+	background-color: #ff8000;
+    border-color: #ff8000;
+    color: #fff;
+    border-radius: 8px; /* border-radius 통해 둥그런 버튼으로 만듭니다. */
+}
+
+
+html, body { margin: 0; }
+
+#visual {
+  position: relative;
+  height: 400px;
+  text-align: center;
+  overflow: hidden;
+}
+
+#video-bg, #visual-content {
+    position: absolute;
+  top: 50%;
+  left: 50%;
+  webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  width: 100%;
+}
+
+#video-bg {
+  height: 100%;
+  background: #000; /* 배경 이미지로 대체 가능 */
+  background-size: cover;
+  z-index: -100;
+}
+
+#video-bg iframe {
+  border: none;
+  width: 100%;
+  height: 100%;
+}
+
+#visual-content {
+  z-index: 100;
+}
+
+h1 {
+  font-size: 42px;
+  font-weight: normal;
+    color: #fff;
+  margin-bottom: 60px;
+}
+
+#visual-btn {
+  color: #fff;
+  font-size: 20px;
+  border: 2px solid #fff;
+  padding: 12px 24px;
+  border-radius: 5px;
+  cursor: pointer;
+}

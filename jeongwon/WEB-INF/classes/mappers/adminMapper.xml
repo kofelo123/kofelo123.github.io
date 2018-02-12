@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.thearc.mapper.AdminMapper">
+
+	<select id="listuser" resultType="UserVO">
+		select * from tbl_user
+	</select>
+ 	
+ 	<select id="adminlogin" resultType="UserVO">
+ 		select uid,upw from tbl_user where uid=#{uid} and upw=#{upw}
+ 	</select>
+ 	
+ 	<update id="authmodify">
+ 		update tbl_user set authority=#{authority} where uid=#{uid}
+ 	</update>
+ 	
+ 	<delete id="userDropCheck">
+ 		delete from tbl_check where uid=#{uid}
+ 	</delete>
+ 	<delete id="userDropMessage">
+ 		delete from tbl_message where sender=#{uid}
+ 	</delete>
+ 	<delete id="userDropUser">
+ 		delete from tbl_user where uid=#{uid}
+ 	</delete>
+ 	
+ 	<select id="dayBoard" resultType="string">
+ 	 <![CDATA[
+ 		select count(*) from tbl_board where regdate > CURDATE()
+        union all
+        select count(*) from tbl_board where regdate < CURDATE() and regdate > CURDATE()-1
+        union all
+        select count(*) from tbl_board where regdate < CURDATE()-1 and regdate > CURDATE()-2
+        union all
+        select count(*) from tbl_board where regdate < CURDATE()-2 and regdate > CURDATE()-3
+        union all
+         select count(*) from tbl_board where regdate < CURDATE()-3 and regdate > CURDATE()-4
+        union all
+         select count(*) from tbl_board where regdate < CURDATE()-5 and regdate > CURDATE()-6
+        union all
+         select count(*) from tbl_board where regdate < CURDATE()-6 and regdate > CURDATE()-7;
+         ]]>
+ 	</select>
+ 	
+ 	<select id="dayReply" resultType="string">
+ 	 <![CDATA[
+ 		 select count(*) from tbl_reply where regdate > CURDATE()
+        union all
+        select count(*) from tbl_reply where regdate < CURDATE() and regdate > CURDATE()-1
+        union all
+        select count(*) from tbl_reply where regdate < CURDATE()-1 and regdate > CURDATE()-2
+        union all
+        select count(*) from tbl_reply where regdate < CURDATE()-2 and regdate > CURDATE()-3
+        union all
+         select count(*) from tbl_reply where regdate < CURDATE()-3 and regdate > CURDATE()-4
+        union all
+         select count(*) from tbl_reply where regdate < CURDATE()-5 and regdate > CURDATE()-6
+        union all
+         select count(*) from tbl_reply where regdate < CURDATE()-6 and regdate > CURDATE()-7;
+        
+         ]]>
+ 	</select>
+ 	
+ 	<select id="cateBoardview" resultType="string">
+ 	 <![CDATA[
+ 		  select sum(viewcnt) from tbl_board where regdate between subdate(curdate(), interval 7 DAY)and now() and category='free'  
+        union all
+        select sum(viewcnt) from tbl_board where regdate between subdate(curdate(), interval 7 DAY)and now() and category='photo'  
+        union all
+        select sum(viewcnt) from tbl_board where regdate between subdate(curdate(), interval 7 DAY)and now() and category='visit'
+        union all
+        select sum(viewcnt) from tbl_board where regdate between subdate(curdate(), interval 7 DAY)and now() and category='qna'  
+        union all
+        select sum(viewcnt) from tbl_board where regdate between subdate(curdate(), interval 7 DAY)and now() and category='news'  
+        union all	
+        select sum(viewcnt) from tbl_board where regdate between subdate(curdate(), interval 7 DAY)and now() and category='thisweek';
+        
+         ]]>
+ 	</select>
+ 	
+ 	<select id="weekcateBoard" resultType="string">
+ 	 <![CDATA[
+ 		select count(*) from tbl_board where regdate between subdate(curdate(), interval 7 DAY)and now() and category='free'
+        union all
+         select count(*) from tbl_board where regdate between subdate(curdate(), interval 7 DAY)and now() and category='photo'
+        union all
+         select count(*) from tbl_board where regdate between subdate(curdate(), interval 7 DAY)and now() and category='visit'
+        union all
+         select count(*) from tbl_board where regdate between subdate(curdate(), interval 7 DAY)and now() and category='qna'
+        union all
+         select count(*) from tbl_board where regdate between subdate(curdate(), interval 7 DAY)and now() and category='news'
+        union all
+         select count(*) from tbl_board where regdate between subdate(curdate(), interval 7 DAY)and now() and category='thisweek'
+         union all
+         select count(*) from tbl_board where regdate between subdate(curdate(), interval 7 DAY)and now() and category='notice';
+         ]]>
+ 	</select>
+
+ 	<select id="weekReplyCount" resultType="string">
+ 	 <![CDATA[
+ 		 select sum(replycnt) from tbl_board where regdate between subdate(curdate(), interval 7 DAY)and now() and category='free'
+         union all
+         select sum(replycnt) from tbl_board where regdate between subdate(curdate(), interval 7 DAY)and now() and category='photo'
+         union all
+         select sum(replycnt) from tbl_board where regdate between subdate(curdate(), interval 7 DAY)and now() and category='visit'
+         union all
+         select sum(replycnt) from tbl_board where regdate between subdate(curdate(), interval 7 DAY)and now() and category='qna'
+         union all
+         select sum(replycnt) from tbl_board where regdate between subdate(curdate(), interval 7 DAY)and now() and category='news'
+         union all
+         select sum(replycnt) from tbl_board where regdate between subdate(curdate(), interval 7 DAY)and now() and category='thisweek'
+         union all
+         select sum(replycnt) from tbl_board where regdate between subdate(curdate(), interval 7 DAY)and now() and category='notice';
+         ]]>
+ 	</select>
+ 	
+ 	<delete id="boardDrop1" >
+ 		delete from tbl_reply where bno = #{bno}
+ 	</delete>
+ 	<delete id="boardDrop2" >
+ 		delete from tbl_attach where bno = #{bno}
+ 	</delete>
+ 	<delete id="boardDrop3" >
+ 		delete from tbl_board where bno = #{bno}
+ 	</delete>
+ 	
+ 	
+</mapper>
